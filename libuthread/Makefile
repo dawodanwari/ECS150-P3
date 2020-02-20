@@ -1,5 +1,8 @@
 # Target library
 lib := libuthread.a
+objs := sem.o queue.o thread.o tps.o
+CC := gcc
+CFLAGS := -Wall -Werror -g
 
 all: $(lib)
 
