@@ -56,15 +56,18 @@ int sem_down(sem_t sem)
     
 	if(sem == NULL) 
 	{
-	    perror("Allocation error");
+		perror("Allocation error");
 		return -1;
 	}
 	
+	enter_critical_section();
 	while(sem->count == 0) 
 	{
 		queue_enqueue(sem->queue, (void*) thread_id);
+		thread_block();
 	}	
 	sem->count--;
+	exit_critical_section(); 
 	return 0;
 }
 
@@ -76,15 +79,18 @@ int sem_up(sem_t sem)
     pthread_t tid;
 	if(sem == NULL || queue_length(sem->queue) == 0) 
 	{
-	    perror("Allocation error");
+		perror("Allocation error");
 		return -1;
 	}
 	
+	enter_critical_section();
 	sem->count++;
 	if(queue_length(sem->queue) != 0) 
 	{ 
-	    queue_dequeue(sem->queue, (void*) &tid);
+		queue_dequeue(sem->queue, (void*) &tid);
+		thread_unblock(tid);
 	}	
+	exit_critical_section();
 	return 0;
 }
 
