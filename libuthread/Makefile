@@ -10,7 +10,7 @@ Q = @
 endif
 
 all:
-<\t>$(libuthread) $(progs)
+	$(libuthread) $(progs)
 
 deps := $(patsubst %.o,%.d,$(objs))
 -include $(deps)
