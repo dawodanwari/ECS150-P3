@@ -8,7 +8,7 @@ deps := $(patsubst %.o,%.d,$(objs))
 -include $(deps)
 %.o: %.c
 	@echo "CC	$@"
-	$(Q)$(CC) $(CFLAGS) $(INCLUDE) -c -o $@ $< $(DEPFLAGS)
+	$(Q)$(CC) $(CFLAGS) -c -o $@ $< $(DEPFLAGS)
 
 clean:
 	@echo "CLEAN	$(CUR_PWD)"
