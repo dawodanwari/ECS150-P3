@@ -1,3 +1,8 @@
+UTHREADLIB := libuthread
+UTHREADPATH := ../$(UTHREADLIB)
+libuthread := $(UTHREADPATH)/$(UTHREADLIB).a
+
+
 all: $(libuthread) $(programs)
 lib := libuthread.a
 objs := sem.o queue.o thread.o tps.o
